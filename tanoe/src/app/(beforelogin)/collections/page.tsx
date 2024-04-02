@@ -2,13 +2,13 @@ import React from 'react'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 
-// !Collection Page
+// ! /collection Page
 const page = () => {
   return (
     <>
       {/* Image */}
       <div className='h-full'>
-        <img src="https://tenuedeattire.com/cdn/shop/files/Tenue-de-Attire-Everyday-Flannel-2-Collection-Page-Desktop.jpg?v=1710350656&width=3200" className="rounded-box w-full" />
+        <img src="https://tenuedeattire.com/cdn/shop/files/Tenue-de-Attire-Everyday-Flannel-2-Collection-Page-Desktop.jpg?v=1710350656&width=3200" />
       </div>
 
       {/* Collumn Sort By */}
@@ -18,7 +18,7 @@ const page = () => {
         </div>
         <div className='border w-28 justify-center flex items-center dropdown dropdown-end'>
           <div tabIndex={0} className='text-slate-950' role='button'>
-            Sort By
+            Sort By <ExpandMoreIcon/>
           </div>
           <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
             <li><a className='text-sm font-thin'>new item</a></li>
