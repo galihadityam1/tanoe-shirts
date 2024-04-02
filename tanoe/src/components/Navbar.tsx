@@ -2,7 +2,7 @@ import React from 'react'
 
 const Navbar = () => {
     return (
-        <div className="navbar bg-base-100 border">
+        <div className="navbar bg-base-100 border sticky top-0">
             <div className="navbar-start">
             </div>
             <div className='flex flex-col justify-center'>
