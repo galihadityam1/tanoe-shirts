@@ -14,7 +14,7 @@ export default function Home() {
         <div className="flex justify-center">
           <a href="collections" className="-mt-28">
             <div className="border border-black rounded-lg">
-              <button className="btn glass z-50">Shop Now</button>
+              <button className="btn glass z-40">Shop Now</button>
             </div>
           </a>
         </div>

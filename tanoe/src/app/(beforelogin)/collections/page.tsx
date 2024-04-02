@@ -32,6 +32,14 @@ const page = () => {
         <div className='w-72 flex justify-center border py-14'>
           <div className='flex flex-col gap-4'>
             <div className="dropdown">
+              <div tabIndex={0} role="button" className="border-b m-1 font-thin w-56 h-10 text-sm flex justify-between p-2">Category <ExpandMoreIcon className='font-thin' /></div>
+              <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+                <li><a href='/collections/flanel' className='text-sm font-thin'>flanel</a></li>
+                <li><a href='/collections/polo' className='text-sm font-thin'>polo</a></li>
+                <li><a href='/collections/basic' className='text-sm font-thin'>basic</a></li>
+              </ul>
+            </div>
+            <div className="dropdown">
               <div tabIndex={0} role="button" className="border-b m-1 font-thin w-56 h-10 text-sm flex justify-between p-2">Product Type <ExpandMoreIcon className='font-thin' /></div>
               <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
                 <li><a className='text-sm font-thin'>long sleeve</a></li>
