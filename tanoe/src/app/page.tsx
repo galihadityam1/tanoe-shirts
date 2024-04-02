@@ -6,8 +6,11 @@ import Image from "next/image";
 export default function Home() {
   return (
     <>
-      <div className="h-full">
-        <CarouselHome />
+      {/* Carousel and button Shop */}
+      <div className="h-screen">
+        <div className="h-[72.5%]">
+          <CarouselHome />
+        </div>
         <div className="flex justify-center">
           <a href="collections" className="-mt-28">
             <div className="border border-black rounded-lg">
@@ -16,8 +19,21 @@ export default function Home() {
           </a>
         </div>
       </div>
+
+      {/* TagLine Image */}
       <TagLine />
-      <CategoryCard />
+
+      {/* Category List */}
+      <div className="flex flex-col items-center justify-center">
+        <div className="mt-6 underline text-2xl font-mono">
+          Our Category.
+        </div>
+        <div className="-mt-6">
+          <CategoryCard />
+        </div>
+      </div>
+
+      {/* Card List */}
     </>
   );
 }
