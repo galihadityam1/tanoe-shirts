@@ -1,4 +1,5 @@
 import { Product } from '@/Types'
+import Link from 'next/link';
 import React from 'react'
 
 const CardProduct = ({ product }: { product: Product }) => {
@@ -13,6 +14,7 @@ const CardProduct = ({ product }: { product: Product }) => {
       }).format(product.disc); 
     return (
         <>
+        <Link href={`/collections/${product.category}/${product.slug}`}>
             <div className='p-4'>
                 <div className="w-40">
                     <div className='h-40'>
@@ -34,6 +36,7 @@ const CardProduct = ({ product }: { product: Product }) => {
                     </div>
                 </div>
             </div>
+        </Link>
         </>
     )
 }

@@ -8,6 +8,10 @@ export async function GetAllProducts() {
     return await productCollection.find().toArray()
 }
 
+export async function GetDetailProduct() {
+    
+}
+
 export async function GetPerCategory() {
     const agg = [
         {

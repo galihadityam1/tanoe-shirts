@@ -4,7 +4,7 @@ const CategoryCard = () => {
     return (
         <div className="h-full items-center justify-center flex flex-row gap-16 py-16">
             <div className="w-80">
-                <a href="/collections/flanel">
+                <a href="/collections/flannel">
                     <img className="rounded-xl" src="https://tenuedeattire.com/cdn/shop/files/Tenue-de-Attire-Flannel-Shirt-Category.jpg?v=1709726337&width=800" />
                 </a>
             </div>

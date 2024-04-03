@@ -14,6 +14,7 @@ const Navbar = () => {
                         <a href='/' className="btn btn-ghost text-xl">Tanoe de Attire</a>
                     </div>
                     <div className='flex flex-row justify-center w-80 gap-4 text-xs font-light p-3'>
+                        <a href="/collections">Collections</a>
                         <a className='' href=''>New Arrivals</a>
                         <a className='' href=''>Best Sellers</a>
                     </div>
