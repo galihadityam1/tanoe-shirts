@@ -5,7 +5,7 @@ import React from 'react'
 const page = () => {
   return (
     <>
-      <div className="h-full">
+      <div className="h-screen">
         <img
           src="https://tenuedeattire.com/cdn/shop/files/BANNER_DALEM-07_Compressed.jpg?v=1686223503&width=3000"
           className="brightness-75 z-0"
