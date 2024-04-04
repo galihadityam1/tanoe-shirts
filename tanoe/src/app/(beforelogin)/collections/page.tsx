@@ -8,11 +8,18 @@ import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { BASE_URL } from '@/db/config/constant';
 
+interface MyData {
+  results: object[]
+}
+
 
 // ! /collection Page
 const Page = ({ params, searchParams }: any) => {
   const [allProducts, setallProducts] = useState([])
   const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(1)
   const router = useRouter()
   let url = `${BASE_URL}/api/products`
   const HandleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,45 +31,74 @@ const Page = ({ params, searchParams }: any) => {
   }
 
   const HandleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
     router.push(`/collections?name=${search}`)
     // console.log(searchParams.name)
-    event.preventDefault()
   }
 
+  async function fetchData() {
+    setLoading(true)
+    if (searchParams.category) {
+      url = `${BASE_URL}/api/products?category=${searchParams.category}`
+    }
 
-  useEffect(() => {
-    async function fetchData() {
-      if (searchParams.category) {
-        url = `${BASE_URL}/api/products?category=${searchParams.category}`
-      }
+    if (searchParams.name) {
+      url = `${BASE_URL}/api/products?name=${search}`
+    }
 
-      if (searchParams.name){
-        url = `${BASE_URL}/api/products?name=${search}`
-      }
+    if (searchParams.disc) {
+      url = `${BASE_URL}/api/products?disc=${searchParams.disc}`
+    }
 
-      if(searchParams.disc){
-        url = `${BASE_URL}/api/products?disc=${searchParams.disc}`
-      }
+    if (searchParams.sleeve) {
+      url = `${BASE_URL}/api/products?sleeve=${searchParams.sleeve}`
+    }
 
-      if(searchParams.sleeve){
-        url = `${BASE_URL}/api/products?sleeve=${searchParams.sleeve}`
-      }
+    if (searchParams.createdAt) {
+      url = `${BASE_URL}/api/products?createdAt=${searchParams.createdAt}`
+    }
 
-      if(searchParams.createdAt){
-        url = `${BASE_URL}/api/products?createdAt=${searchParams.createdAt}`
-      }
+    url = `${BASE_URL}/api/products?page=${page}`
 
-      const res = await fetch(url, {
-        cache: "no-store",
-      })
-      const result = await res.json()
-      // console.log(result);
+    const res = await fetch(url, {
+      cache: "no-store",
+    })
 
+    const result = await res.json()
+    setTotalPage(result.data[0].totalPages)
+
+    if (result.data[0].results) {
+      let newData = result.data[0].results
+      setallProducts([...allProducts, ...newData] as any)
+      setPage(page + 1)
+    } else {
       setallProducts(result.data)
     }
+    setLoading(false)
+  }
+
+  useEffect(() => {
     fetchData()
   }, [searchParams])
 
+  useEffect(() => {
+    const handleScroll = (event: any) => {
+      event.preventDefault()
+      if (
+        window.innerHeight + document.documentElement.scrollTop !==
+        document.documentElement.offsetHeight
+      ) {
+        return;
+      }
+      if (page > totalPage) {
+        return
+      }
+      fetchData();
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [loading, page]);
 
   return (
     <>
@@ -134,6 +170,8 @@ const Page = ({ params, searchParams }: any) => {
             {allProducts && allProducts.map((product: Product, i: any) => (
               <CardProduct product={product} key={i} />
             ))}
+
+            {loading && <p>Loading....</p>}
 
           </div>
         </div>
