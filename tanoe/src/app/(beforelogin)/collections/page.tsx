@@ -3,19 +3,21 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CardProduct from '@/components/CardProduct';
 import { Product } from '@/Types';
 import { useParams } from 'next/navigation';
+import Link from 'next/link';
 
 
 // ! /collection Page
-const page = async ({params, searchParams}: any) => {
-  const res = await fetch('http://localhost:3000/api/products', {
+const page = async ({ params, searchParams }: any) => {
+  let url = 'http://localhost:3000/api/products'
+  if (searchParams.category) {
+    url = `http://localhost:3000/api/products?category=${searchParams.category}`
+  }
+
+  const res = await fetch(url, {
     cache: "no-store",
-    
   })
   const datas = await res.json()
   const allProducts = datas.data
-
-  // console.log(searchParams.new);
-  
 
 
   return (
@@ -48,9 +50,9 @@ const page = async ({params, searchParams}: any) => {
             <div className="dropdown">
               <div tabIndex={0} role="button" className="border-b m-1 font-thin w-56 h-10 text-sm flex justify-between p-2">Category <ExpandMoreIcon className='font-thin' /></div>
               <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-                <li><a href='/collections/flanel' className='text-sm font-thin'>flannel</a></li>
-                <li><a href='/collections/polo' className='text-sm font-thin'>polo</a></li>
-                <li><a href='/collections/basic' className='text-sm font-thin'>basic</a></li>
+                <li><Link href='/collections?category=flannel' className='text-sm font-thin'>flannel</Link></li>
+                <li><Link href='/collections?category=polo' className='text-sm font-thin'>polo</Link></li>
+                <li><Link href='/collections?category=basic' className='text-sm font-thin'>basic</Link></li>
               </ul>
             </div>
             <div className="dropdown">

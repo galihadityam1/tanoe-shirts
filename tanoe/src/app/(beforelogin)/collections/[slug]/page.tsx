@@ -1,6 +1,15 @@
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
-const page = () => {
+const page = async ({
+    params,
+}: {
+    params: {
+        slug: string,
+        category: string
+    }
+}) => {
+    console.log(params, 'ini di page');
+    
     return (
         <>
             <div className='flex justify-center h-screen w-screen'>
@@ -11,7 +20,7 @@ const page = () => {
                     <div className=' flex-1 ml-14 flex justify-start flex-col'>
                         <div className='mx-8'>
                             <div className='py-4'>
-                                Name Polo
+                                Name Basic
                             </div>
                             <div className='py-4'>
                                 Tags?
