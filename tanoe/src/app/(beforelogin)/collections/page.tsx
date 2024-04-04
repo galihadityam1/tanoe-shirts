@@ -37,9 +37,19 @@ const Page = ({ params, searchParams }: any) => {
       }
 
       if (searchParams.name){
-        // console.log('masuk');
-        
         url = `http://localhost:3000/api/products?name=${search}`
+      }
+
+      if(searchParams.disc){
+        url = `http://localhost:3000/api/products?disc=${searchParams.disc}`
+      }
+
+      if(searchParams.sleeve){
+        url = `http://localhost:3000/api/products?sleeve=${searchParams.sleeve}`
+      }
+
+      if(searchParams.createdAt){
+        url = `http://localhost:3000/api/products?createdAt=${searchParams.createdAt}`
       }
 
       const res = await fetch(url, {
@@ -71,8 +81,8 @@ const Page = ({ params, searchParams }: any) => {
             Sort By <ExpandMoreIcon />
           </div>
           <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-            <li><a className='text-sm font-thin'>new item</a></li>
-            <li><a className='text-sm font-thin'>old item</a></li>
+            <li><Link href="/collections?createdAt=new" className='text-sm font-thin'>new item</Link></li>
+            <li><Link href="/collections?createdAt=old" className='text-sm font-thin'>old item</Link></li>
           </ul>
         </div>
       </div>
@@ -92,15 +102,15 @@ const Page = ({ params, searchParams }: any) => {
             <div className="dropdown">
               <div tabIndex={0} role="button" className="border-b m-1 font-thin w-56 h-10 text-sm flex justify-between p-2">Product Type <ExpandMoreIcon className='font-thin' /></div>
               <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-                <li><a className='text-sm font-thin'>long sleeve</a></li>
-                <li><a className='text-sm font-thin'>short sleeve</a></li>
+                <li><Link href="/collections?sleeve=long" className='text-sm font-thin'>long sleeve</Link></li>
+                <li><Link href="/collections?sleeve=short" className='text-sm font-thin'>short sleeve</Link></li>
               </ul>
             </div>
             <div className="dropdown">
               <div tabIndex={0} role="button" className="border-b m-1 font-thin w-56 h-10 text-sm flex justify-between p-2">Price <ExpandMoreIcon className='font-thin' /></div>
               <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-                <li><a className='text-sm font-thin'>high to low</a></li>
-                <li><a className='text-sm font-thin'>low to high</a></li>
+                <li><Link href='/collections?disc=low' className='text-sm font-thin'>high to low</Link></li>
+                <li><Link href='/collections?disc=high' className='text-sm font-thin'>low to high</Link></li>
               </ul>
             </div>
             <div className="dropdown">

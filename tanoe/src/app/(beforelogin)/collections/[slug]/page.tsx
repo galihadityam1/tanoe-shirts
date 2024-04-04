@@ -13,7 +13,7 @@ const Page = async ({
     let { slug } = params
     let res = await fetch(`http://localhost:3000/api/products/${slug}`, {
         cache: 'no-cache'
-    })
+    })    
 
     const result = await res.json()
     const { data } = result
