@@ -1,5 +1,6 @@
 "use server"
 
+import { BASE_URL } from '@/db/config/constant';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 const Page = async ({
@@ -11,7 +12,7 @@ const Page = async ({
 }) => {
     // console.log(params, 'ini di page');
     let { slug } = params
-    let res = await fetch(`http://localhost:3000/api/products/${slug}`, {
+    let res = await fetch(`${BASE_URL}/api/products/${slug}`, {
         cache: 'no-cache'
     })    
 

@@ -14,3 +14,8 @@ export type Product = {
     createdAt: Date,
     updatedAt: Date
 }
+
+export type input = {
+    email: string,
+    password: string
+}

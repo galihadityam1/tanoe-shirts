@@ -6,6 +6,7 @@ import CardProduct from '@/components/CardProduct';
 import { Product } from '@/Types';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { BASE_URL } from '@/db/config/constant';
 
 
 // ! /collection Page
@@ -13,7 +14,7 @@ const Page = ({ params, searchParams }: any) => {
   const [allProducts, setallProducts] = useState([])
   const [search, setSearch] = useState("");
   const router = useRouter()
-  let url = 'http://localhost:3000/api/products'
+  let url = `${BASE_URL}/api/products`
   const HandleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault()
     const { value } = event.target
@@ -24,32 +25,31 @@ const Page = ({ params, searchParams }: any) => {
 
   const HandleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     router.push(`/collections?name=${search}`)
-    console.log(searchParams.name)
+    // console.log(searchParams.name)
     event.preventDefault()
   }
 
 
   useEffect(() => {
     async function fetchData() {
-
       if (searchParams.category) {
-        url = `http://localhost:3000/api/products?category=${searchParams.category}`
+        url = `${BASE_URL}/api/products?category=${searchParams.category}`
       }
 
       if (searchParams.name){
-        url = `http://localhost:3000/api/products?name=${search}`
+        url = `${BASE_URL}/api/products?name=${search}`
       }
 
       if(searchParams.disc){
-        url = `http://localhost:3000/api/products?disc=${searchParams.disc}`
+        url = `${BASE_URL}/api/products?disc=${searchParams.disc}`
       }
 
       if(searchParams.sleeve){
-        url = `http://localhost:3000/api/products?sleeve=${searchParams.sleeve}`
+        url = `${BASE_URL}/api/products?sleeve=${searchParams.sleeve}`
       }
 
       if(searchParams.createdAt){
-        url = `http://localhost:3000/api/products?createdAt=${searchParams.createdAt}`
+        url = `${BASE_URL}/api/products?createdAt=${searchParams.createdAt}`
       }
 
       const res = await fetch(url, {
