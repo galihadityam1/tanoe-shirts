@@ -40,25 +40,17 @@ const Page = ({ params, searchParams }: any) => {
     setLoading(true)
     if (searchParams.category) {
       url = `${BASE_URL}/api/products?category=${searchParams.category}`
-    }
-
-    if (searchParams.name) {
+    } else if (searchParams.name) {
       url = `${BASE_URL}/api/products?name=${search}`
-    }
-
-    if (searchParams.disc) {
+    } else if (searchParams.disc) {
       url = `${BASE_URL}/api/products?disc=${searchParams.disc}`
-    }
-
-    if (searchParams.sleeve) {
+    } else if (searchParams.sleeve) {
       url = `${BASE_URL}/api/products?sleeve=${searchParams.sleeve}`
-    }
-
-    if (searchParams.createdAt) {
+    } else if (searchParams.createdAt) {
       url = `${BASE_URL}/api/products?createdAt=${searchParams.createdAt}`
+    } else {
+      url = `${BASE_URL}/api/products?page=${page}`
     }
-
-    url = `${BASE_URL}/api/products?page=${page}`
 
     const res = await fetch(url, {
       cache: "no-store",
@@ -164,16 +156,14 @@ const Page = ({ params, searchParams }: any) => {
           </div>
         </div>
         <div className='flex-1 border justify-center'>
+          {loading && <div className=' flex justify-center items-center py-5'><span className="loading loading-spinner loading-lg"></span></div>}
           <div className="grid grid-cols-6 gap-6 w-full justify-center">
-
             {/* Card Section */}
-            {allProducts && allProducts.map((product: Product, i: any) => (
+            {allProducts && allProducts.map((product: Product, i: number) => (
               <CardProduct product={product} key={i} />
             ))}
-
-            {loading && <p>Loading....</p>}
-
           </div>
+            {loading && <div className=' flex justify-center items-center py-5'><span className="loading loading-spinner loading-lg"></span></div>}
         </div>
       </div>
     </>

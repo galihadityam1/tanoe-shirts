@@ -70,7 +70,7 @@ const Page = async ({
                             </div>
                             <div className='flex justify-center'>
                                 <a href="">
-                                    <div className='bg-blue-600 hover:bg-blue-800 rounded-xl'>
+                                    <div className='bg-blue-600 hover:bg-blue-800 rounded-xl hover:text-white'>
                                         <div className=' flex flex-row h-10 justify-center items-center w-80'>
                                             <div className='flex-1 flex justify-center'>
                                                 Add to Cart

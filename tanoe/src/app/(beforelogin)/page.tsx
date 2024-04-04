@@ -1,9 +1,21 @@
 "use server"
+import { Product } from "@/Types";
+import CardProduct from "@/components/CardProduct";
 import CarouselHome from "@/components/CarouselHome";
 import CategoryCard from "@/components/CategoryCard";
 import TagLine from "@/components/TagLine";
+import { BASE_URL } from "@/db/config/constant";
+import Link from "next/link";
 
 export default async function Home() {
+  const res = await fetch(`${BASE_URL}/api`, {
+    cache: 'no-store'
+  })
+
+  const result = await res.json()
+  const product = result.data
+  // console.log(product);
+
   return (
     <>
       {/* Carousel and button Shop */}
@@ -34,6 +46,21 @@ export default async function Home() {
       </div>
 
       {/* Card List */}
+      <div className=" flex flex-col justify-center items-center">
+        <div className="text-2xl font-semibold text-red-500 mb-6">
+          RAMADHAN SALE !
+        </div>
+        <div className="grid grid-cols-5 gap-6 justify-center">
+          {product && product.map((el: Product, i: number) => (
+            <CardProduct product={el} key={i} />
+          ))}
+        </div>
+        <Link href='/collections' className="mb-8 border h-10 w-64 flex justify-center items-center bg-blue-500 rounded-xl text-white hover:bg-blue-700">
+          SEE MORE OUR PRODUCT
+        </Link>
+      </div>
+
+
     </>
   );
 }
