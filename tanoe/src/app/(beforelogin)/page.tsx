@@ -1,9 +1,9 @@
+"use server"
 import CarouselHome from "@/components/CarouselHome";
 import CategoryCard from "@/components/CategoryCard";
 import TagLine from "@/components/TagLine";
-import Image from "next/image";
 
-export default function Home() {
+export default async function Home() {
   return (
     <>
       {/* Carousel and button Shop */}

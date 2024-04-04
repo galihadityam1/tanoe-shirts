@@ -3,7 +3,7 @@ import React from 'react'
 
 
 //  ! /sign-up Page
-const page = () => {
+const Page = () => {
     return (
         <>
             <div className='h-full flex flex-col items-center'>
@@ -93,4 +93,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Page

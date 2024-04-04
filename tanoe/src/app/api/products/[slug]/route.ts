@@ -1,11 +1,14 @@
 import { GetDetailProduct } from "@/db/model/product";
+import { NextResponse } from "next/server";
 
 export async function GET(
     request: Request,
     {params}: {params: {slug: string}}) {
-        console.log(params, 'ini di route api');
+        const {slug} = params        
         
-    let data = await GetDetailProduct()
-    console.log(data);
-    
+    let data = await GetDetailProduct(slug)
+    return NextResponse.json({
+        status: 200,
+        data
+    })
 }

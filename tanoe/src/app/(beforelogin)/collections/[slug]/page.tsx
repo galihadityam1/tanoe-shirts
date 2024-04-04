@@ -1,36 +1,57 @@
+"use server"
+
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
-const page = async ({
+const Page = async ({
     params,
 }: {
     params: {
         slug: string,
-        category: string
     }
 }) => {
-    console.log(params, 'ini di page');
-    
+    // console.log(params, 'ini di page');
+    let { slug } = params
+    let res = await fetch(`http://localhost:3000/api/products/${slug}`, {
+        cache: 'no-cache'
+    })
+
+    const result = await res.json()
+    const { data } = result
+    // console.log(data);
+
+    let currency = new Intl.NumberFormat("id-ID", {
+        currency: "IDR",
+        style: "currency",
+      }).format(data.price);
+
+      let currentDisc = new Intl.NumberFormat("id-ID", {
+        currency: "IDR",
+        style: "currency",
+      }).format(data.disc); 
+
+
+
     return (
         <>
             <div className='flex justify-center h-screen w-screen'>
                 <div className='w-[70%] h-[70%] my-24 flex flex-row'>
                     <div className='flex-1'>
-                        <img src="https://tenuedeattire.com/cdn/shop/products/TDACMT022024165_1_b77d99ab-9bd7-49d1-9989-b99ce76ac70c.jpg?v=1710324581&width=1400" alt="" className='py-4'/>
+                        <img src={data.image} alt="" className='py-4' />
                     </div>
                     <div className=' flex-1 ml-14 flex justify-start flex-col'>
                         <div className='mx-8'>
                             <div className='py-4'>
-                                Name Basic
+                                {data.name}
                             </div>
-                            <div className='py-4'>
-                                Tags?
+                            <div className='py-4 text-blue-500'>
+                                {data.tags}
                             </div>
                             <div className='py-4 flex flex-row gap-11 border-b'>
-                                <div>
-                                    Harga diskon
+                                <div className='text-red-600'>
+                                    {currentDisc}
                                 </div>
-                                <div>
-                                    Harga Awal
+                                <div className='line-through'>
+                                    {currency}
                                 </div>
                             </div>
                             <div className='py-4'>
@@ -44,7 +65,7 @@ const page = async ({
                                 </div>
                             </div>
                             <div className='py-4'>
-                                Stok: 99
+                                Stok: {data.stok}
                             </div>
                             <div className='flex justify-center'>
                                 <a href="">
@@ -67,7 +88,7 @@ const page = async ({
                                 Description:
                                 <br />
                                 <div className='text-sm'>
-                                    Kemeja flanel panjang yang nyaman dipakai sepanjang hari. Terbuat dari bahan berkualitas tinggi yang lembut dan hangat. Desain yang trendi dan cocok dipadukan dengan celana jeans atau celana panjang favorit Anda.
+                                    {data.description}
                                 </div>
                             </div>
                         </div>
@@ -79,4 +100,4 @@ const page = async ({
     )
 }
 
-export default page
+export default Page

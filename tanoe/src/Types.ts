@@ -9,6 +9,8 @@ export type Product = {
     disc: number,
     description: string,
     excerpt: string,
+    tags: string[],
+    stok: number,
     createdAt: Date,
     updatedAt: Date
 }

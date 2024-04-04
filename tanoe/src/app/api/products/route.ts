@@ -5,8 +5,9 @@ export async function GET(req: Request) {
     const { searchParams } = new URL(req.url)
     
     const category = searchParams.get('category')
+    const name = searchParams.get('name')
     
-    let data = await GetAllProducts(category)
+    let data = await GetAllProducts(category, name)
     return NextResponse.json({
         status: 200,
         data

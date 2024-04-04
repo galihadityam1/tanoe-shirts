@@ -14,7 +14,7 @@ const CardProduct = ({ product }: { product: Product }) => {
       }).format(product.disc); 
     return (
         <>
-        <Link href={`/collections?category=${product.category}/${product.slug}`}>
+        <Link href={`/collections/${product.slug}`}>
             <div className='p-4'>
                 <div className="w-40">
                     <div className='h-40'>

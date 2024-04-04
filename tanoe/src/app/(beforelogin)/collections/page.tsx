@@ -1,23 +1,57 @@
-import React from 'react'
+"use client"
+import React, { useEffect, useState } from 'react'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import SearchIcon from '@mui/icons-material/Search';
 import CardProduct from '@/components/CardProduct';
 import { Product } from '@/Types';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 
 // ! /collection Page
-const page = async ({ params, searchParams }: any) => {
+const Page = ({ params, searchParams }: any) => {
+  const [allProducts, setallProducts] = useState([])
+  const [search, setSearch] = useState("");
+  const router = useRouter()
   let url = 'http://localhost:3000/api/products'
-  if (searchParams.category) {
-    url = `http://localhost:3000/api/products?category=${searchParams.category}`
+  const HandleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault()
+    const { value } = event.target
+
+    setSearch(value)
+
   }
 
-  const res = await fetch(url, {
-    cache: "no-store",
-  })
-  const datas = await res.json()
-  const allProducts = datas.data
+  const HandleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    router.push(`/collections?name=${search}`)
+    console.log(searchParams.name)
+    event.preventDefault()
+  }
+
+
+  useEffect(() => {
+    async function fetchData() {
+
+      if (searchParams.category) {
+        url = `http://localhost:3000/api/products?category=${searchParams.category}`
+      }
+
+      if (searchParams.name){
+        // console.log('masuk');
+        
+        url = `http://localhost:3000/api/products?name=${search}`
+      }
+
+      const res = await fetch(url, {
+        cache: "no-store",
+      })
+      const result = await res.json()
+      // console.log(result);
+
+      setallProducts(result.data)
+    }
+    fetchData()
+  }, [searchParams])
 
 
   return (
@@ -69,6 +103,17 @@ const page = async ({ params, searchParams }: any) => {
                 <li><a className='text-sm font-thin'>low to high</a></li>
               </ul>
             </div>
+            <div className="dropdown">
+              <div tabIndex={0} role="button" className="border-b m-1 font-thin w-56 h-10 text-sm flex justify-between p-2">Search <SearchIcon className='font-thin' /></div>
+              <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+                <li>
+                  <form onSubmit={HandleSubmit}>
+                    <input type="text" placeholder="Type here" className="input input-bordered input-sm w-full max-w-xs" onChange={HandleChange} value={search} name='name' />
+
+                  </form>
+                </li>
+              </ul>
+            </div>
 
           </div>
         </div>
@@ -87,4 +132,4 @@ const page = async ({ params, searchParams }: any) => {
   )
 }
 
-export default page
+export default Page
