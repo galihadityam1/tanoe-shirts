@@ -19,3 +19,9 @@ export type input = {
     email: string,
     password: string
 }
+
+export type payload = {
+    _id: string,
+    email: string,
+    iat: number
+  }

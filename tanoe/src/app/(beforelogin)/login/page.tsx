@@ -10,7 +10,7 @@ import { cookies } from 'next/headers'
 const Page = () => {
     async function submitAction(formData: FormData) {
         "use server"
-        console.log('lalala');
+        // console.log('lalala');
 
         const email = formData.get('email')
         const password = formData.get('password')

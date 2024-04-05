@@ -1,7 +1,7 @@
 import { Product } from '@/Types'
 import Link from 'next/link';
 import React from 'react'
-import ShoppingCartSharpIcon from '@mui/icons-material/ShoppingCartSharp';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 const CardProduct = ({ product }: { product: Product }) => {
     let currency = new Intl.NumberFormat("id-ID", {
@@ -20,7 +20,7 @@ const CardProduct = ({ product }: { product: Product }) => {
                     <div className="w-40">
                         <div className='h-40'>
                             <figure><img src={product.image} /></figure>
-                            <svg className='h-8 w-8 -mt-9 ml-2'><ShoppingCartSharpIcon sx={{ fontSize: 5 }} className='btn btn-outline text-slate-600 hover:text-slate-200' /></svg>
+                            <svg className='h-8 w-8 -mt-9 ml-2'><AddShoppingCartIcon sx={{ fontSize: 5 }} className='btn btn-outline text-slate-600 hover:text-slate-200' /></svg>
                         </div>
                         <div className="p-2  flex flex-col">
                             <div className='text-sm font-extralight font-serif'>

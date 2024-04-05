@@ -1,6 +1,9 @@
+"use client"
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import PersonIcon from '@mui/icons-material/Person';
-import Whistlist from './Whistlist';
+import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
+import LogoutIcon from '@mui/icons-material/Logout';
+import { logout } from '@/actions/user';
 
 const Navbar = () => {
     return (
@@ -22,16 +25,19 @@ const Navbar = () => {
                     </div>
                 </div>
                 <div className="navbar-end">
-                    <button className="btn btn-ghost btn-circle">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
-                    </button>
+                    <a href="/wishlist">
+                        <button className="btn btn-ghost btn-circle">
+                            <ShoppingBagIcon />
+                        </button>
+                    </a>
                     <a href="/login">
                         <button className="btn btn-ghost btn-circle">
                             <PersonIcon />
                         </button>
                     </a>
-                    <Whistlist />
-
+                    <button className="btn btn-ghost btn-circle" onClick={() => logout()}>
+                        <LogoutIcon />
+                    </button>
                 </div>
             </div>
 

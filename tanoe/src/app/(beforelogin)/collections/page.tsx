@@ -163,7 +163,7 @@ const Page = ({ params, searchParams }: any) => {
               <CardProduct product={product} key={i} />
             ))}
           </div>
-            {loading && <div className=' flex justify-center items-center py-5'><span className="loading loading-spinner loading-lg"></span></div>}
+          {/* {loading && <div className=' flex justify-center items-center py-5'><span className="loading loading-spinner loading-lg"></span></div>} */}
         </div>
       </div>
     </>
