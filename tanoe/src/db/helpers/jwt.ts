@@ -10,7 +10,7 @@ export const createToken = (payload: JwtPayload) => {
 export const readPayload = (token: string) => jwt.verify(token, SECRET_KEY)
 
 export const readPayloadJose = async <T>(token: string) => {
-    console.log(token, SECRET_KEY, '<<<ini token');
+    console.log(token, SECRET_KEY, '<<< di page jwt');
     const secret = new TextEncoder().encode(SECRET_KEY)
     const result = await jose.jwtVerify<T>(token, secret)
     return result.payload

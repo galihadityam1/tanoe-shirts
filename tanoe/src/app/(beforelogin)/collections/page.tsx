@@ -147,7 +147,6 @@ const Page = ({ params, searchParams }: any) => {
                 <li>
                   <form onSubmit={HandleSubmit}>
                     <input type="text" placeholder="Type here" className="input input-bordered input-sm w-full max-w-xs" onChange={HandleChange} value={search} name='name' />
-
                   </form>
                 </li>
               </ul>
@@ -163,7 +162,7 @@ const Page = ({ params, searchParams }: any) => {
               <CardProduct product={product} key={i} />
             ))}
           </div>
-          {/* {loading && <div className=' flex justify-center items-center py-5'><span className="loading loading-spinner loading-lg"></span></div>} */}
+            {/* {loading && <div className=' flex justify-center items-center py-5'><span className="loading loading-spinner loading-lg"></span></div>} */}
         </div>
       </div>
     </>

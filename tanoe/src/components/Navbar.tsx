@@ -3,7 +3,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import PersonIcon from '@mui/icons-material/Person';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { logout } from '@/actions/user';
+import { logout, toLogin } from '@/actions/user';
 
 const Navbar = () => {
     return (
@@ -30,11 +30,9 @@ const Navbar = () => {
                             <ShoppingBagIcon />
                         </button>
                     </a>
-                    <a href="/login">
-                        <button className="btn btn-ghost btn-circle">
-                            <PersonIcon />
-                        </button>
-                    </a>
+                    <button className="btn btn-ghost btn-circle" onClick={() => toLogin()}>
+                        <PersonIcon />
+                    </button>
                     <button className="btn btn-ghost btn-circle" onClick={() => logout()}>
                         <LogoutIcon />
                     </button>

@@ -1,40 +1,9 @@
 import React, { useState } from 'react'
-import { input } from '@/Types'
-import { BASE_URL } from '@/db/config/constant'
-import { redirect } from 'next/navigation'
-import { Alert } from '@mui/material'
-import { cookies } from 'next/headers'
+import { submitAction } from '@/actions/user'
 
 
 // ! /login page
 const Page = () => {
-    async function submitAction(formData: FormData) {
-        "use server"
-        // console.log('lalala');
-
-        const email = formData.get('email')
-        const password = formData.get('password')
-        console.log(email, password);
-
-
-        let res = await fetch(`${BASE_URL}/api/users/login`, {
-            cache: 'no-store',
-            method: 'POST',
-            body: JSON.stringify({ email, password }),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-
-        const result = await res.json()
-
-        if (!res.ok) {
-            return redirect('/login' + `?error=${result.error}`)
-        }
-
-        cookies().set("Authorization", `Bearer ${result.data.token}`)
-        return redirect('/')
-    }
     return (
         <>
             <div className='h-full flex flex-col items-center'>

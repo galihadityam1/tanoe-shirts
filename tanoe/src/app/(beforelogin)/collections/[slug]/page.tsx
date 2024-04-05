@@ -1,5 +1,6 @@
 "use server"
 
+import { addCart } from '@/actions/user';
 import { BASE_URL } from '@/db/config/constant';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
@@ -69,18 +70,19 @@ const Page = async ({
                                 Stok: {data.stok}
                             </div>
                             <div className='flex justify-center'>
-                                <a href="">
-                                    <div className='bg-blue-600 hover:bg-blue-800 rounded-xl hover:text-white'>
+                                <form action={addCart}>
+                                    <input type="text" className='hidden' name="id" value={data._id} />
+                                    <button type='submit' className='bg-blue-600 hover:bg-blue-800 rounded-xl hover:text-white'>
                                         <div className=' flex flex-row h-10 justify-center items-center w-80'>
                                             <div className='flex-1 flex justify-center'>
-                                                Add to Cart
+                                                Add to Wishlist
                                             </div>
                                             <div className='w-14 flex justify-center'>
                                                 <AddShoppingCartIcon sx={{ fontSize: 30 }} />
                                             </div>
                                         </div>
-                                    </div>
-                                </a>
+                                    </button>
+                                </form>
                             </div>
                             <div className='py-4'>
                                 <img src="https://cdn.shopify.com/s/files/1/0019/2105/6881/files/abd.png?v=1618815626" alt="" />

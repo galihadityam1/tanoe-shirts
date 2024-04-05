@@ -25,3 +25,11 @@ export type payload = {
     email: string,
     iat: number
   }
+
+  export type User = {
+    _id: string,
+    email: string,
+    username: string,
+    wishlist: object[],
+    detail: object[]
+  }

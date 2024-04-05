@@ -39,7 +39,7 @@ export async function middleware(request: NextRequest) {
     })
     // const newHeaders = 
     // let token = user.split(" ")
-    return NextResponse.next()
+    // return NextResponse.next()
 }
 
 // See "Matching Paths" below to learn more
