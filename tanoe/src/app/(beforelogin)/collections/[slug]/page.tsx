@@ -1,5 +1,4 @@
 "use server"
-
 import { addCart } from '@/actions/user';
 import { BASE_URL } from '@/db/config/constant';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
@@ -15,23 +14,23 @@ const Page = async ({
     let { slug } = params
     let res = await fetch(`${BASE_URL}/api/products/${slug}`, {
         cache: 'no-cache'
-    })    
+    })
+
 
     const result = await res.json()
+
     const { data } = result
     // console.log(data);
 
     let currency = new Intl.NumberFormat("id-ID", {
         currency: "IDR",
         style: "currency",
-      }).format(data.price);
+    }).format(data.price);
 
-      let currentDisc = new Intl.NumberFormat("id-ID", {
+    let currentDisc = new Intl.NumberFormat("id-ID", {
         currency: "IDR",
         style: "currency",
-      }).format(data.disc); 
-
-
+    }).format(data.disc);
 
     return (
         <>
@@ -42,7 +41,7 @@ const Page = async ({
                     </div>
                     <div className=' flex-1 ml-14 flex justify-start flex-col'>
                         <div className='mx-8'>
-                            <div className='py-4'>
+                            <div className='py-4 text-xl font-semibold'>
                                 {data.name}
                             </div>
                             <div className='py-4 text-blue-500'>

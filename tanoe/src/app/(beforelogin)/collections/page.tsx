@@ -7,6 +7,7 @@ import { Product } from '@/Types';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { BASE_URL } from '@/db/config/constant';
+import { addCart } from '@/actions/user';
 
 interface MyData {
   results: object[]
@@ -54,6 +55,7 @@ const Page = ({ params, searchParams }: any) => {
 
     const res = await fetch(url, {
       cache: "no-store",
+      mode: "no-cors"
     })
 
     const result = await res.json()
@@ -69,6 +71,7 @@ const Page = ({ params, searchParams }: any) => {
     setLoading(false)
   }
 
+  
   useEffect(() => {
     fetchData()
   }, [searchParams])

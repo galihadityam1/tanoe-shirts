@@ -3,21 +3,15 @@ import { BASE_URL } from "@/db/config/constant";
 import { ObjectId } from "mongodb";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { NextResponse } from "next/server";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { showToast } from "./toast";
+
 
 export async function logout() {
     cookies().delete("Authorization");
     redirect("/login")
-}
-
-export async function toLogin(){
-    // console.log('masukk');
-    let token = cookies().get("Authorization")
-    // console.log(token);
-    
-    if(token){
-        redirect('/')
-    }
-    redirect('/login')
 }
 
 export async function submitAction(formData: FormData) {
@@ -61,12 +55,13 @@ export const fetchWishList = async () => {
         redirect('/login')
     }
 
-    console.log(result.data);
+    // console.log(result.data);
     return result.data[0]
 }
 
 export async function addCart(formData: FormData) {
     // console.log('masuk');
+    
     const objectId = formData.get("id")
     let res = await fetch(`${BASE_URL}/api/wishlist`, {
         cache: 'no-store',
@@ -79,16 +74,18 @@ export async function addCart(formData: FormData) {
     })
 
     let result = await res.json()
-    console.log(result);
+    // console.log(result);
 
     if (!res.ok) {
         return redirect('/')
     }
     
-    // console.log(res);
+    // console.log(result, 'ini di action');
+    if(!result.data.wishlit){
+        // console.log('masuk');
+        
+        return
+    }
     
     return
-    // console.log(id, 'masuk function');
-    
-    
 }

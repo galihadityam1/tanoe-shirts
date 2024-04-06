@@ -8,7 +8,7 @@ export async function GetAllProducts(category: string | null, name: string | nul
     let res = Number(page)
 
     let sort = 0
-    let perPage = 40
+    let perPage = 10
     let pageNumber = res
     let skip = (pageNumber - 1) * perPage
 
