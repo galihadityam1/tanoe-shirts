@@ -21,8 +21,19 @@ export async function POST(request: Request) {
     if(body.objectId){
         let objectId = new ObjectId(String(body.objectId))
         let id = headers().get('x-user-id')
+        if(!id){
+            return NextResponse.json({
+                errMessage: 'Belum Login'
+            },
+            {
+                status: 400
+            })
+        }
+
         let userId = new ObjectId(String(id))
         const find = await FindWishlist(objectId, userId)
+        console.log(find);
+        
         if (find){
             return NextResponse.json({
                 errMessage: 'Baju sudah Masuk WishList'
@@ -39,6 +50,14 @@ export async function POST(request: Request) {
     }
 
         let id = headers().get('x-user-id')
+        if(!id){
+            return NextResponse.json({
+                errMessage: 'Belum Login'
+            },
+            {
+                status: 400
+            })
+        }
         let objectId = new ObjectId(String(body.id))
         let userId = new ObjectId(String(id))
         const find = await FindWishlist(objectId, userId)
@@ -50,7 +69,7 @@ export async function POST(request: Request) {
                 status: 400
             })
         }
-        const wishlist = await AddWishList(body, userId)
+        const wishlist = await AddWishList(objectId, userId)
         return NextResponse.json({
             data: { wishlist }
         },

@@ -20,10 +20,21 @@ const CardProduct = ({ product }: { product: Product }) => {
             body: JSON.stringify({ id })
         })
 
+        const result = await res.json()
+        // console.log(result.errMessage);
+
+        if (result.errMessage) {
+            return Swal.fire({
+                title: result.errMessage,
+                showConfirmButton: false,
+                timer: 1500,
+                icon: 'warning'
+            })
+        }
         // console.log(res.ok);
         if (!res.ok) {
             return Swal.fire({
-                title: 'Baju Sudah dalam wishlist',
+                title: 'res.ok',
                 showConfirmButton: false,
                 timer: 1500,
                 icon: 'warning'
@@ -31,9 +42,12 @@ const CardProduct = ({ product }: { product: Product }) => {
         }
 
 
-        const result = await res.json()
-        // console.log(result);
-
+        return Swal.fire({
+            title: 'Wishlist added',
+            showConfirmButton: false,
+            timer: 1500,
+            icon: 'success'
+        })
     }
 
     let currency = new Intl.NumberFormat("id-ID", {
@@ -58,22 +72,22 @@ const CardProduct = ({ product }: { product: Product }) => {
                             <svg className='h-8 w-8 -mt-9 ml-2'><AddShoppingCartIcon sx={{ fontSize: 5 }} className='btn btn-outline text-slate-600 hover:text-slate-200' /></svg>
                         </div>
                     </div>
-            <Link href={`/collections/${product.slug}`}>
-                    <div className="p-2  flex flex-col">
-                        <div className='text-sm font-extralight font-serif'>
-                            {product.name}
+                    <Link href={`/collections/${product.slug}`}>
+                        <div className="p-2  flex flex-col">
+                            <div className='text-sm font-extralight font-serif'>
+                                {product.name}
+                            </div>
+                            <div className='text-xs mt-3 font-extralight font-serif text-red-600'>
+                                {currentDisc}
+                            </div>
+                            <div className='text-xs font-extralight font-serif line-through'>
+                                {currency}
+                            </div>
+                            <div className='text-xs font-extralight font-serif py-1'>
+                                {product.excerpt}
+                            </div>
                         </div>
-                        <div className='text-xs mt-3 font-extralight font-serif text-red-600'>
-                            {currentDisc}
-                        </div>
-                        <div className='text-xs font-extralight font-serif line-through'>
-                            {currency}
-                        </div>
-                        <div className='text-xs font-extralight font-serif py-1'>
-                            {product.excerpt}
-                        </div>
-                    </div>
-            </Link>
+                    </Link>
                 </div>
             </div>
         </>

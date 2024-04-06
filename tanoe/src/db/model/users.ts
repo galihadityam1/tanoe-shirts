@@ -5,7 +5,13 @@ import db from "../config";
 const userCollection = db.collection("users")
 
 export async function GetUserByEmail(email: string | null){
-    let data = await userCollection.findOne({email})
+    let data = await userCollection.findOne({email})    
+
+    return data
+}
+
+export async function UserRegister(email: string | null, password: string | null, username: string | null) {
+    let data = await userCollection.insertOne({email, password, username})
 
     return data
 }

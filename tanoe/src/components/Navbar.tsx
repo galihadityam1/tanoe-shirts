@@ -17,7 +17,7 @@ const Navbar = () => {
 
         if (token) {
             return Swal.fire({
-                title: 'Sudah Login',
+                title: 'You are already login',
                 showConfirmButton: false,
                 timer: 1500,
                 icon: 'warning'
@@ -30,7 +30,7 @@ const Navbar = () => {
         let token = cookies.get("Authorization")
         if (!token) {
             return Swal.fire({
-                title: 'Anda Belum Login',
+                title: 'You are not login yet',
                 showConfirmButton: false,
                 timer: 1500,
                 icon: 'warning'
@@ -43,14 +43,16 @@ const Navbar = () => {
     async function wishlist() {
         let token = cookies.get("Authorization")
         if (!token) {
-            return Swal.fire({
-                title: 'Anda Belum Login',
+            Swal.fire({
+                title: 'Login First',
                 showConfirmButton: false,
                 timer: 1500,
                 icon: 'warning'
             })
+            router.push("/login")
         }
-        router.push("/login")
+
+        router.push('/wishlist')
     }
     return (
         <div className='bg-blue-800 text-center border-b sticky top-0 z-50'>

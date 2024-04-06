@@ -17,7 +17,23 @@ export async function logout() {
 export async function submitAction(formData: FormData) {
     const email = formData.get('email')
     const password = formData.get('password')
-    console.log(email, password);
+    // console.log(email, password);
+    // if (!email) {
+    //     return Swal.fire({
+    //         title: 'email required',
+    //         showConfirmButton: false,
+    //         timer: 1500,
+    //         icon: 'warning'
+    //     })
+    // }
+    // if (!password) {
+    //     return Swal.fire({
+    //         title: 'password required',
+    //         showConfirmButton: false,
+    //         timer: 1500,
+    //         icon: 'warning'
+    //     })
+    // }
 
 
     let res = await fetch(`${BASE_URL}/api/users/login`, {

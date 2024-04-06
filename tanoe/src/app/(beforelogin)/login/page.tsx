@@ -1,9 +1,60 @@
+"use client"
+import { BASE_URL } from '@/db/config/constant'
+import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
-import { submitAction } from '@/actions/user'
+import Swal from 'sweetalert2'
+import Cookies from 'universal-cookie'
+// import { submitAction } from '@/actions/user'
 
 
 // ! /login page
 const Page = () => {
+    const router = useRouter()
+    const cookies = new Cookies()
+
+    async function submitAction(formData: FormData) {
+        const email = formData.get('email')
+        const password = formData.get('password')
+        // console.log(email, password);
+        if (!email) {
+            return Swal.fire({
+                title: 'email required',
+                showConfirmButton: false,
+                timer: 1500,
+                icon: 'warning'
+            })
+        }
+        if (!password) {
+            return Swal.fire({
+                title: 'password required',
+                showConfirmButton: false,
+                timer: 1500,
+                icon: 'warning'
+            })
+        }
+    
+    
+        let res = await fetch(`${BASE_URL}/api/users/login`, {
+            cache: 'no-store',
+            method: 'POST',
+            body: JSON.stringify({ email, password }),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+    
+        const result = await res.json()
+        // console.log(res.ok);
+        
+    
+        if (!res.ok) {
+            return router.push('/login' + `?error=${result.error}`)
+        }
+    
+        cookies.set("Authorization", `Bearer ${result.data.token}`)
+        return router.push('/')
+    }
+
     return (
         <>
             <div className='h-full flex flex-col items-center'>
