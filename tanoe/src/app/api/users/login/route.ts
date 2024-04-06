@@ -35,9 +35,6 @@ export async function POST(request: Request) {
         }
 
         const token = createToken({ _id: user._id, email: user.email });
-
-        // cookies().set("Authorization", `Bearer ${token}`)
-        // console.log(token);
         
 
         return NextResponse.json({

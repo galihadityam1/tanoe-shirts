@@ -44,7 +44,14 @@ const Page = () => {
         })
     
         const result = await res.json()
-        // console.log(res.ok);
+        if(result.error){
+            return Swal.fire({
+                title: result.error,
+                showConfirmButton: false,
+                timer: 1500,
+                icon: 'warning'
+            })
+        }
         
     
         if (!res.ok) {

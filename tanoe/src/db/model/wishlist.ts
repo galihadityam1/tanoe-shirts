@@ -7,7 +7,7 @@ const wishlistCollection = db.collection("wishlist")
 
 
 export async function FindWishlist(objectId: ObjectId, userId: ObjectId){
-    console.log('masuk sini');
+    // console.log('masuk sini');
     
     let find = await wishlistCollection.findOne({objectId, userId})
     // console.log(find);
