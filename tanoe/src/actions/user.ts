@@ -98,10 +98,9 @@ export async function addCart(formData: FormData) {
     
     // console.log(result, 'ini di action');
     if(!result.data.wishlit){
-        // console.log('masuk');
-        
         return
     }
     
     return
 }
+

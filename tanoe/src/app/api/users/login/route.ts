@@ -1,7 +1,6 @@
 import { comparePassword } from "@/db/helpers/hash";
 import { createToken } from "@/db/helpers/jwt";
 import { GetUserByEmail } from "@/db/model/users";
-import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import { ZodError } from "zod";
 

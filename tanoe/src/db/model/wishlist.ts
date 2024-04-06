@@ -24,3 +24,9 @@ export async function AddWishList(objectId: ObjectId, userId: ObjectId){
 
     return result
 }
+
+export async function DeleteWishlist(objectId: ObjectId){
+    let result = await wishlistCollection.deleteOne({objectId})
+
+    return result
+}
