@@ -43,13 +43,13 @@ const Navbar = () => {
     async function wishlist() {
         let token = cookies.get("Authorization")
         if (!token) {
-            Swal.fire({
+            router.push("/login")
+            return Swal.fire({
                 title: 'Login First',
                 showConfirmButton: false,
                 timer: 1500,
                 icon: 'warning'
             })
-            router.push("/login")
         }
 
         router.push('/wishlist')
