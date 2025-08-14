@@ -52,8 +52,6 @@ export const fetchWishList = async () => {
     if (result.errMessage === "Invalid Login") {
         redirect('/login')
     }
-
-    // console.log(result.data);
     return result.data[0]
 }
 

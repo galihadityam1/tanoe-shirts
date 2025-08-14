@@ -16,9 +16,9 @@ export async function POST(request: Request) {
             })
         }
 
-        log('sebelum')
+        // log('sebelum')
         let data = await UserRegister(body.email, body.password, body.username)
-        log('sesudah')
+        // log('sesudah')
 
         return NextResponse.json({
             message: 'Success'

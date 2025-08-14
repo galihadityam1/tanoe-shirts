@@ -1,16 +1,14 @@
 import { GetWishlist } from "@/db/model/users";
 import { AddWishList, DeleteWishlist, FindWishlist } from "@/db/model/wishlist";
 import { ObjectId } from "mongodb";
-import { cookies, headers } from "next/headers";
+import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 
 export async function GET() {
-    // let id = cookies().get("Authorization")
     let _id = headers().get('x-user-id')
     let id = new ObjectId(String(_id))
-    // console.log(id, '<<<< ini harsunya id');
-
     let data = await GetWishlist(id)
+    
     return NextResponse.json({ data }, {
         status: 200,
     })
@@ -23,7 +21,7 @@ export async function POST(request: Request) {
         let id = headers().get('x-user-id')
         if (!id) {
             return NextResponse.json({
-                errMessage: 'Belum Login'
+                errMessage: "You haven't logged in"
             },
                 {
                     status: 400
@@ -32,11 +30,9 @@ export async function POST(request: Request) {
 
         let userId = new ObjectId(String(id))
         const find = await FindWishlist(objectId, userId)
-        console.log(find);
-
         if (find) {
             return NextResponse.json({
-                errMessage: 'Baju sudah Masuk WishList'
+                errMessage: "Shirt is already in wishlist"
             },
                 {
                     status: 400
@@ -52,7 +48,7 @@ export async function POST(request: Request) {
     let id = headers().get('x-user-id')
     if (!id) {
         return NextResponse.json({
-            errMessage: 'Belum Login'
+            errMessage: "You haven't logged in"
         },
             {
                 status: 400
@@ -63,7 +59,7 @@ export async function POST(request: Request) {
     const find = await FindWishlist(objectId, userId)
     if (find) {
         return NextResponse.json({
-            errMessage: 'Baju sudah Masuk WishList'
+            errMessage: "Shirt is already in wishlist"
         },
             {
                 status: 400
@@ -82,11 +78,10 @@ export async function POST(request: Request) {
 
 export async function DELETE(request: Request) {
     const body = await request.json()
-    // console.log(body.id);
     let id = headers().get('x-user-id')
     if (!id) {
         return NextResponse.json({
-            errMessage: 'Belum Login'
+            errMessage: "You haven't logged in"
         },
             {
                 status: 400
@@ -97,7 +92,7 @@ export async function DELETE(request: Request) {
     const find = await FindWishlist(objectId, userId)
     if (!find) {
         return NextResponse.json({
-            errMessage: 'There is no wishlist like that'
+            errMessage: "There is no wishlist like that"
         },
             {
                 status: 400

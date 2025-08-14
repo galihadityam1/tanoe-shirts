@@ -4,13 +4,7 @@ import { addCart } from '@/actions/user';
 import { BASE_URL } from '@/db/config/constant';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
-const Page = async ({
-    params,
-}: {
-    params: {
-        slug: string,
-    }
-}) => {
+const Page = async ({params}: {params: {slug: string,}}) => {
     // console.log(params, 'ini di page');
     let { slug } = params
     let res = await fetch(`${BASE_URL}/api/products/${slug}`, {

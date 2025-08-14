@@ -14,17 +14,17 @@ export default async function Home() {
 
   const result = await res.json()
   const product = result.data
-  // console.log(product);
 
   return (
     <>
       {/* Carousel and button Shop */}
-      <div className="h-screen">
+      <div className="h-screen relative">
         <div className="h-[72.5%]">
           <CarouselHome />
         </div>
+        {/* Shop Now Button */}
         <div className="flex justify-center">
-          <a href="collections" className="-mt-28">
+          <a href="/collections" className="-mt-28">
             <div className="border border-black rounded-lg">
               <button className="btn glass z-40">Shop Now</button>
             </div>
@@ -40,28 +40,27 @@ export default async function Home() {
         <div className="mt-6 underline text-2xl font-mono">
           Our Category.
         </div>
-        <div className="-mt-6">
+        <div className="mt-6 w-full sm:w-auto">
           <CategoryCard />
         </div>
       </div>
 
       {/* Card List */}
-      <div className=" flex flex-col justify-center items-center">
+      <div className="flex flex-col justify-center items-center">
         <div className="text-2xl font-semibold text-red-500 mb-6">
           RAMADHAN SALE !
         </div>
-        <div className="grid grid-cols-5 gap-6 justify-center">
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 w-full max-w-screen-xl px-4">
           {product && product.map((el: Product, i: number) => (
             <CardProduct product={el} key={i} />
           ))}
         </div>
-        <Link href='/collections' className="mb-8 border h-10 w-64 flex justify-center items-center bg-blue-500 rounded-xl text-white hover:bg-blue-700">
+
+        <Link href='/collections' className="mb-8 border h-10 w-full sm:w-64 flex justify-center items-center bg-blue-500 rounded-xl text-white hover:bg-blue-700">
           SEE MORE OUR PRODUCT
         </Link>
       </div>
-
-
     </>
   );
 }
-

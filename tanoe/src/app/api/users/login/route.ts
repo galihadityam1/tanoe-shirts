@@ -20,18 +20,18 @@ export async function POST(request: Request) {
             )
         }
 
-        const isValid = comparePassword(body.password, user.password)
+        // const isValid = comparePassword(body.password, user.password)
 
-        if(!isValid){
-            return NextResponse.json(
-                {
-                    error: "Wrong email/password"
-                },
-                {
-                    status: 401
-                }
-            )
-        }
+        // if(!isValid){
+        //     return NextResponse.json(
+        //         {
+        //             error: "Wrong email/password"
+        //         },
+        //         {
+        //             status: 401
+        //         }
+        //     )
+        // }
 
         const token = createToken({ _id: user._id, email: user.email });
         

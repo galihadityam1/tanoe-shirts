@@ -7,6 +7,8 @@ export type Product = {
     image: string,
     price: number,
     disc: number,
+    stringdisc: string,
+    stringprice: string,
     description: string,
     excerpt: string,
     tags: string[],

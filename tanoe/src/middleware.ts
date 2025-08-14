@@ -7,7 +7,6 @@ import { payload } from './Types';
 
 export async function middleware(request: NextRequest) {
     let user = cookies().get("Authorization")
-    console.log(user, '<<<<<<');
     if (!user) {
         return NextResponse.json({
             errMessage: "Invalid Login"
@@ -24,7 +23,6 @@ export async function middleware(request: NextRequest) {
     const newHeaders = new Headers(request.headers)
 
     const result: payload = await readPayloadJose(token)
-    // console.log(result, '<<< ini result');
 
     // Add a new header
     newHeaders.set('x-user-id', result._id)

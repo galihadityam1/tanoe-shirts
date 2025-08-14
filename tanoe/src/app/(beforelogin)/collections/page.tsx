@@ -13,28 +13,26 @@ interface MyData {
   results: object[]
 }
 
-
-// ! /collection Page
 const Page = ({ params, searchParams }: any) => {
   const [allProducts, setallProducts] = useState([])
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [totalPage, setTotalPage] = useState(1)
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
   const router = useRouter()
   let url = `${BASE_URL}/api/products`
+
   const HandleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault()
     const { value } = event.target
-
     setSearch(value)
-
   }
 
   const HandleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     router.push(`/collections?name=${search}`)
-    // console.log(searchParams.name)
   }
 
   async function fetchData() {
@@ -42,7 +40,11 @@ const Page = ({ params, searchParams }: any) => {
     if (searchParams.category) {
       url = `${BASE_URL}/api/products?category=${searchParams.category}`
     } else if (searchParams.name) {
-      url = `${BASE_URL}/api/products?name=${search}`
+      if (searchParams.name === "") {
+        url = `${BASE_URL}/api/products?page=${page}`
+      } else {
+        url = `${BASE_URL}/api/products?name=${search}`
+      }
     } else if (searchParams.disc) {
       url = `${BASE_URL}/api/products?disc=${searchParams.disc}`
     } else if (searchParams.sleeve) {
@@ -71,7 +73,10 @@ const Page = ({ params, searchParams }: any) => {
     setLoading(false)
   }
 
-  
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
   useEffect(() => {
     fetchData()
   }, [searchParams])
@@ -93,25 +98,25 @@ const Page = ({ params, searchParams }: any) => {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [loading, page]);
+  }, [page]);
 
   return (
     <>
       {/* Image */}
       <div className='h-full'>
-        <img src="https://tenuedeattire.com/cdn/shop/files/Tenue-de-Attire-Everyday-Flannel-2-Collection-Page-Desktop.jpg?v=1710350656&width=3200" />
+        <img className="w-full" src="https://tenuedeattire.com/cdn/shop/files/Tenue-de-Attire-Everyday-Flannel-2-Collection-Page-Desktop.jpg?v=1710350656&width=3200" />
       </div>
 
       {/* Collumn Sort By */}
-      <div className='flex flex-row h-12 justify-center mt-4 font-thin text-base'>
-        <div className='border flex-1 justify-center items-center flex'>
+      <div className='flex flex-wrap justify-between items-center mt-4 px-4 font-thin text-base'>
+        <div className='border flex-1 text-center py-2'>
           Collections
         </div>
-        <div className='border w-28 justify-center flex items-center dropdown dropdown-end'>
-          <div tabIndex={0} className='text-slate-950' role='button'>
+        <div className='border w-full sm:w-28 text-center py-2 mt-2 sm:mt-0'>
+          <div tabIndex={0} className='text-slate-950' role='button' onClick={toggleDropdown}>
             Sort By <ExpandMoreIcon />
           </div>
-          <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+          <ul tabIndex={0} className={isDropdownOpen ? "dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52" : "hidden"}>
             <li><Link href="/collections?createdAt=new" className='text-sm font-thin'>new item</Link></li>
             <li><Link href="/collections?createdAt=old" className='text-sm font-thin'>old item</Link></li>
           </ul>
@@ -119,8 +124,8 @@ const Page = ({ params, searchParams }: any) => {
       </div>
 
       {/* Card and Side Tab */}
-      <div className='flex flex-row px-10 py-6'>
-        <div className='w-72 flex justify-center border py-14'>
+      <div className='flex flex-wrap sm:flex-nowrap px-4 py-6'>
+        <div className='w-full sm:w-72 flex justify-center border py-14'>
           <div className='flex flex-col gap-4'>
             <div className="dropdown">
               <div tabIndex={0} role="button" className="border-b m-1 font-thin w-56 h-10 text-sm flex justify-between p-2">Category <ExpandMoreIcon className='font-thin' /></div>
@@ -158,9 +163,8 @@ const Page = ({ params, searchParams }: any) => {
           </div>
         </div>
         <div className='flex-1 border justify-center'>
-          {loading && <div className=' flex justify-center items-center py-5'><span className="loading loading-spinner loading-lg"></span></div>}
-          <div className="grid grid-cols-6 gap-6 w-full justify-center">
-            {/* Card Section */}
+          {/* Card Section */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 w-full">
             {allProducts && allProducts.map((product: Product, i: number) => (
               <CardProduct product={product} key={i} />
             ))}
